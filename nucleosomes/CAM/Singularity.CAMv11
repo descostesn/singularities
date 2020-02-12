@@ -1,0 +1,40 @@
+Bootstrap: debootstrap
+OSVersion: trusty
+MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+
+%help
+ 	This is the container for runing CAM 1.1.
+ 	See article at https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0182771.
+ 	The website containing the documentation cannot be found. 
+
+%environment
+ 	export LC_ALL=C.UTF-8
+ 	export LANG=C.UTF-8
+
+%post
+
+	apt update
+  	apt install -y wget gcc g++ gfortran libreadline-dev xorg-dev make unzip \
+  	libkrb5-3 texlive-latex-base
+  	
+	# ~~~~~ R 2.14.1 ~~~~~ #
+	cd /root
+	wget https://cran.r-project.org/src/base/R-2/R-2.14.1.tar.gz
+	tar -xvzf R-2.14.1.tar.gz && cd R-2.14.1 && ./configure && make && make install
+  	
+  	# ~~~~~ Python 2.7 ~~~~~ #
+  	cd /root
+  	wget https://www.python.org/ftp/python/2.7/Python-2.7.tgz
+  	tar -xvzf Python-2.7.tgz && cd Python-2.7 && ./configure && make && make install
+  	  	 	
+  	# ~~~~~ CAM 1.1 ~~~~~ #
+  	cd /root
+  	wget https://sourceforge.net/projects/campipe/files/CAM.1.1.linux.x86_64.zip
+  	unzip CAM.1.1.linux.x86_64.zip
+  	cd CAM.1.1.linux.x86_64
+  	python setup.py install
+  	
+%labels
+  Author Nicolas Descostes
+  Version v0.0.1
+  	
