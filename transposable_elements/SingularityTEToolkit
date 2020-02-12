@@ -4,6 +4,7 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
 
 %help
   The TEtoolkit documentation is available at http://hammelllab.labsites.cshl.edu/software/.
+  The TEtoolkit version is 2.0.3
   
 
 %post
