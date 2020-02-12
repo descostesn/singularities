@@ -2,6 +2,10 @@ BootStrap: debootstrap
 OSVersion: bionic
 MirrorURL: http://us.archive.ubuntu.com/ubuntu/
 
+%help
+  The TEtoolkit documentation is available at http://hammelllab.labsites.cshl.edu/software/.
+  
+
 %post
     # ~~~~~~ General setup and folder creation ~~~~~~ #
     
@@ -31,6 +35,7 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
     
     # ~~~~~ TEtoolkit 2.0.3 ~~~~~ #
     conda install -c bioconda tetoolkit=2.0.3
+
     
 %environment
     export PATH="${PATH}:/conda/bin"
@@ -44,4 +49,8 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
     export LC_MONETARY=C
     export LC_PAPER=C 
     export LC_MEASUREMENT=C
-    
+
+%labels
+	Author Nicolas Descostes
+	Version v0.0.1
+	    
