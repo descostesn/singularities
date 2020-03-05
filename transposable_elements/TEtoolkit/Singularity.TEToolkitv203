@@ -37,6 +37,11 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
     # ~~~~~ TEtoolkit 2.0.3 ~~~~~ #
     conda install -c bioconda tetoolkit=2.0.3
 
+	#~~~~~ installing DESeq2 ~~~~~ #
+  	cd /home
+  	R --slave -e 'install.packages("BiocManager", repos="https://cloud.r-project.org/")'
+  	R --slave -e 'BiocManager::install("DESeq2")' 
+  	
     
 %environment
     export PATH="${PATH}:/conda/bin"
