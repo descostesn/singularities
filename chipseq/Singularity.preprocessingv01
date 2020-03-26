@@ -11,7 +11,7 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
     
     apt-get update && apt-get install -y wget bzip2 build-essential \
     make gcc g++ gfortran libxml2-dev libcairo2-dev unzip libcpan-meta-perl \
-    libgd-dev libkrb5-3 gzip
+    libgd-dev libkrb5-3 gzip libxtst6
     export LC_ALL=C
     export LC_CTYPE=C 
     export LC_COLLATE=C 
