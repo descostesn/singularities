@@ -46,7 +46,7 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
 	conda install -y -c bioconda picard=2.22.1
 	
     # ~~~~~ SAMTOOLS ~~~~~ #
-	conda install -y -c bioconda samtools=1.10
+	conda install -y -c bioconda samtools=1.9
 	
 	# ~~~~~ DEEPTOOLS ~~~~~ #
 	conda install -y -c bioconda deeptools=3.1.3
