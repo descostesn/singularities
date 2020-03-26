@@ -1,0 +1,83 @@
+BootStrap: debootstrap
+OSVersion: bionic
+MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+
+%help
+
+	This singularity contains several toools for chip-seq pre-processing.
+
+%post
+    # ~~~~~~ General setup and folder creation ~~~~~~ #
+    
+    apt-get update && apt-get install -y wget bzip2 build-essential \
+    make gcc g++ gfortran libxml2-dev libcairo2-dev unzip libcpan-meta-perl \
+    libgd-dev libkrb5-3 gzip
+    export LC_ALL=C
+    export LC_CTYPE=C 
+    export LC_COLLATE=C 
+    export LC_TIME=C
+    export LC_MESSAGES=C
+    export LC_MONETARY=C
+    export LC_PAPER=C 
+    export LC_MEASUREMENT=C
+	
+    # ~~~~~ MINICONDA ~~~~~ #
+    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+    bash Miniconda3-latest-Linux-x86_64.sh -b -p /conda && \
+    rm -f Miniconda3-latest-Linux-x86_64.sh
+    export PATH="/conda/bin:${PATH}"
+    
+    # ~~~~~ FASTERQ-DUMP ~~~~~ #
+    cd /opt
+    wget http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.10.4/sratoolkit.2.10.4-ubuntu64.tar.gz && \
+    tar -xvzf sratoolkit.2.10.4-ubuntu64.tar.gz && rm sratoolkit.2.10.4-ubuntu64.tar.gz 
+    export PATH="/opt/sratoolkit.2.10.4-ubuntu64/bin:${PATH}"
+
+    # ~~~~~ FASTQC ~~~~~ #
+    conda install -y -c bioconda fastqc=0.11.8
+
+	# ~~~~~ TRIM GALORE ~~~~~ #
+    conda install -y -c bioconda trim-galore=0.6.2
+
+	# ~~~~~ BOWTIE 2 ~~~~~ #
+    conda install -y -c bioconda bowtie2=2.3.5
+    
+    # ~~~~~ PICARD TOOLS ~~~~~ #
+	conda install -y -c bioconda picard=2.22.1
+	
+    # ~~~~~ SAMTOOLS ~~~~~ #
+	conda install -y -c bioconda samtools=1.10
+	
+	# ~~~~~ DEEPTOOLS ~~~~~ #
+	conda install -y -c bioconda deeptools=3.1.3
+	
+	# ~~~~~ MACS2 ~~~~~ #
+	conda install -y -c bioconda macs2=2.2.6
+	
+	# ~~~~~ R 3.6.1 ~~~~~ #
+	conda install -y -c r r-base=3.6.1
+	
+	# ~~~~~ Install required R packages ~~~~~ #
+  	R --slave -e 'install.packages("BiocManager", repos="https://cloud.r-project.org/")'
+  	R --slave -e 'BiocManager::install("stringr")'
+  	R --slave -e 'BiocManager::install("csaw")' 	
+	
+	
+%environment
+    export PATH="${PATH}:/conda/bin"
+    export PATH="${PATH}:/opt"
+    export PATH="${PATH}:/opt/sratoolkit.2.10.4-ubuntu64/bin"
+	export LC_ALL=C
+    export LC_CTYPE=C 
+    export LC_COLLATE=C 
+    export LC_TIME=C
+    export LC_MESSAGES=C
+    export LC_MONETARY=C
+    export LC_PAPER=C 
+    export LC_MEASUREMENT=C
+
+%labels
+	Author Nicolas Descostes
+	Version v0.0.1
+
+    
