@@ -1,0 +1,33 @@
+Bootstrap: debootstrap
+OSVersion: xenial
+MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+
+%help
+    This is the singularity to run bitmapper2 v 2.0.0.7.
+    This image was created the 2020-11-17 by nicolas.descostes@embl.it.
+    More information can be found at http://home.ustc.edu.cn/~chhy/BitMapper2.html.
+    BitMapper2 is a GPU-accelerated all-mapper that exploits the parallel processing capability of GPUs to improve the speed.
+
+%environment
+    export LC_ALL=C.UTF-8
+    export LANG=C.UTF-8
+
+%post
+    apt-get update && apt-get install -y wget
+    
+    #~~~~~~~ bitmapper2 ~~~~~~~#
+    
+    wget http://home.ustc.edu.cn/~chhy/bitmapper2_gpu_e_7 && \
+    mkdir -p /opt/bitmapper2/bin && mv bitmapper2_gpu_e_7 /opt/bitmapper2/bin/bitmapper2 && \
+    cd /opt/bitmapper2/bin && chmod 777 bitmapper2
+
+%environment
+    export PATH="${PATH}:/opt/bitmapper2/bin"
+
+%labels
+    Author Nicolas Descostes
+    Version v0.0.1
+
+
+    
+    
