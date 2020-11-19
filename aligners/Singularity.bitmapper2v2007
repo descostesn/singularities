@@ -8,10 +8,6 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
     More information can be found at http://home.ustc.edu.cn/~chhy/BitMapper2.html.
     BitMapper2 is a GPU-accelerated all-mapper that exploits the parallel processing capability of GPUs to improve the speed.
 
-%environment
-    export LC_ALL=C.UTF-8
-    export LANG=C.UTF-8
-
 %post
     apt-get update && apt-get install -y wget
     
@@ -23,6 +19,8 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
 
 %environment
     export PATH="${PATH}:/opt/bitmapper2/bin"
+    export LC_ALL=C.UTF-8
+    export LANG=C.UTF-8
 
 %labels
     Author Nicolas Descostes
