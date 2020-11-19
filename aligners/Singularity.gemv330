@@ -1,0 +1,35 @@
+Bootstrap: debootstrap
+OSVersion: bionic
+MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+
+%help
+    This recipe was copied from https://github.com/smarco/gem3-mapper/blob/master/docker/Dockerfile in Nov 2020.
+
+%post
+
+    DEBIAN_FRONTEND=noninteractive
+    # Change the variable below to the current version
+    GEM_MAPPER_VERSION=3.3.0
+    INSTALL_BASE=/software/opt/gem3-mapper
+    SRC_BASE=/software/src/gem3-mapper
+
+    apt-get -y update && apt-get -y install gcc git make && \
+    apt-get -y clean && apt-get -y autoremove && rm -rf /var/lib/apt-get/lists/* 
+
+    #~~~~~~~~~ GEM 3.3.0 in Nov 2020 ~~~~~~~~~~#
+    mkdir -p ${SRC_BASE} && mkdir -p ${INSTALL_BASE} && cd ${SRC_BASE} && \
+    git clone --recursive https://github.com/smarco/gem3-mapper.git -b ${GEM_MAPPER_VERSION} ./ && \
+    chmod +x configure && ./configure && make && \
+    mv ${SRC_BASE}/bin ${INSTALL_BASE} && \
+    ln -s ${INSTALL_BASE}/bin/* /usr/local/bin/
+
+    which gem-mapper
+
+%environment
+    export PATH="${PATH}:/software/opt/gem3-mapper/bin" 
+
+%labels
+    Author Nicolas Descostes
+    Version v0.0.1
+
+    
