@@ -8,8 +8,7 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
 %post
 
     DEBIAN_FRONTEND=noninteractive
-    # Change the variable below to the current version
-    GEM_MAPPER_VERSION=3.3.0
+    GEM_MAPPER_VERSION=master
     INSTALL_BASE=/software/opt/gem3-mapper
     SRC_BASE=/software/src/gem3-mapper
 
