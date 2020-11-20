@@ -1,0 +1,28 @@
+Bootstrap: debootstrap
+OSVersion: bionic
+MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+
+%help
+  The source code of this tool can be obtained from http://bioresearch.byu.edu/gnumap/download.cgi (registration required).
+  The Genomic Next-generation Universal MAPper GNUMAP is a program designed to accurately map sequence data obtained from next-generation sequencing machines (specifically that of Solexa/Illumina) back to a genome of any size.
+  One significant problem with many genomic mapping programs is the way duplicate regions in genomic DNA are dealt with. 
+  This project develops GNUMAP, a program capable of handling such repetitive regions. By using the posterior probability of mapping a given read to a specific genomic loation, we are able to account for these repetitive reads by distributing them across several regions in the genome.
+  Article: https://academic.oup.com/bioinformatics/article/26/1/38/182331
+
+ 
+%post 
+
+    apt-get -y update && apt-get -y install wget build-essential
+    
+    #~~~~~~~~ GNUMAP 3.0.2 ~~~~~~~~#
+    cd /opt
+    wget http://bioresearch.byu.edu/gnumap/gnumap-3.0.2.tgz && \
+    tar -xvzf gnumap-3.0.2.tgz && rm gnumap-3.0.2.tgz && cd gnumap && \
+    make
+
+%environment
+    export PATH="${PATH}:/opt/gnumap/bin" 
+
+%labels
+    Author Nicolas Descostes
+    Version v0.0.1
