@@ -1,0 +1,30 @@
+BootStrap: debootstrap
+OSVersion: bionic
+MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+
+%help
+
+    mrsFAST-Ultra, a fast, cache oblivious, SNP-aware aligner that can handle the multi-mapping of HTS reads very efficiently.
+    Publication: https://academic.oup.com/nar/article/42/W1/W494/2436016
+    Repository: https://github.com/sfu-compbio/mrsfast
+
+%post
+    # ~~~~~~ General setup and folder creation ~~~~~~ #
+    
+    apt-get update && apt-get install -y wget 
+    
+    # ~~~~~ MINICONDA ~~~~~ #
+    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+    bash Miniconda3-latest-Linux-x86_64.sh -b -p /conda && \
+    rm -f Miniconda3-latest-Linux-x86_64.sh
+    export PATH="/conda/bin:${PATH}"
+
+    # ~~~~~ mrsFAST ~~~~~ #
+    conda install -y -c bioconda mrsfast=3.4.2
+
+%environment
+    export PATH="${PATH}:/conda/bin"
+
+%labels
+    Author Nicolas Descostes
+    Version v0.0.1
