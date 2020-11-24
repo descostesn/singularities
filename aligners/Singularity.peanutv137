@@ -1,0 +1,26 @@
+BootStrap: debootstrap
+OSVersion: Xenial
+MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+
+%help
+
+    PEANUT is a read mapper for DNA or RNA sequence reads. Read mapping is the process of aligning biological DNA or RNA sequencing reads to a known reference genome.
+    By exploiting the massive parallelism of modern graphics processors and a novel index datastructure (the q-group index), PEANUT achieves supreme speed compared to current state of the art read mappers like BWA MEM, Bowtie2 and RazerS3 while maintaining their accuracy. PEANUT thereby allows to report both only the best hit or all hits of a read.
+    Publication: https://peerj.com/articles/606/
+    Repository: https://peanut.readthedocs.io/
+    
+%post
+    # ~~~~~~ General setup and folder creation ~~~~~~ #
+    
+    apt-get update && apt-get install -y nvidia-current python3-setuptools \
+    python3-numpy python3-pip wget
+    
+    pip3 install --upgrade cython pybind11 mako pyopencl
+    
+    # ~~~~~~ Peanut 1.3.7 ~~~~~~ #
+    wget https://files.pythonhosted.org/packages/f6/50/5fcc48d40c1ca876e4dfc9f79cf38f7b1a8adc75fb70ba52730ff7779b95/peanut-1.3.7.tar.gz && \
+    mv peanut-1.3.7.tar.gz /opt && cd /opt
+    tar -xvzf peanut-1.3.7.tar.gz && rm peanut-1.3.7.tar.gz && cd peanut-1.3.7/
+    python3 setup.py install
+    
+    !! NOT WORKING
