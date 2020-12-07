@@ -9,16 +9,28 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
 
     # ~~~~~~ General setup and folder creation ~~~~~~ #
     
-    apt-get update && apt-get install -y wget
+    apt-get update && apt-get install -y wget build-essential checkinstall \
+    libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev \
+    libgdbm-dev libc6-dev libbz2-dev
     
-    # ~~~~~ FASTERQ-DUMP 2.10.8 ~~~~~ #
+    # ~~~~~ Python 3.5.9 ~~~~~ #
     cd /opt
-    wget https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.10.8/sratoolkit.2.10.8-ubuntu64.tar.gz && \
-    tar -xvzf sratoolkit.2.10.8-ubuntu64.tar.gz && rm sratoolkit.2.10.8-ubuntu64.tar.gz 
-    export PATH="/opt/sratoolkit.2.10.8-ubuntu64/bin:${PATH}"
+    wget https://www.python.org/ftp/python/3.5.9/Python-3.5.9.tgz && \
+    tar xzf Python-3.5.9.tgz && rm Python-3.5.9.tgz && cd Python-3.5.9 && \
+    ./configure --enable-optimizations && make altinstall
+    cd
+    
+    # ~~~~~ MINICONDA ~~~~~ #
+    wget https://repo.anaconda.com/miniconda/Miniconda3-4.7.12.1-Linux-x86_64.sh && \
+    bash Miniconda3-4.7.12.1-Linux-x86_64.sh -b -p /conda && \
+    rm -f Miniconda3-4.7.12.1-Linux-x86_64.sh
+    export PATH="/conda/bin:${PATH}"
+   
+    # ~~~~~ parallel-fastq-dump 0.6.3 ~~~~~ #
+    conda install -c bioconda parallel-fastq-dump=0.6.3
     
 %environment
-    export PATH="${PATH}:/opt/sratoolkit.2.10.8-ubuntu64/bin"
+    export PATH="${PATH}:/conda/bin"
 
 %labels
     Author Nicolas Descostes
