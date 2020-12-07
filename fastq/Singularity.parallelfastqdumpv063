@@ -3,7 +3,7 @@ OSVersion: bionic
 MirrorURL: http://us.archive.ubuntu.com/ubuntu/
 
 %help
-    This singularity install fasterq-dump 2.10.8 from sra-toolkit.
+    This singularity install parallel-fastq-dump v0.6.3.
 
 %post
 
