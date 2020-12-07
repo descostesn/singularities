@@ -1,0 +1,26 @@
+BootStrap: debootstrap
+OSVersion: alpine
+MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+
+%help
+    This singularity install fasterq-dump 2.10.8 from sra-toolkit.
+
+%post
+
+    # ~~~~~~ General setup and folder creation ~~~~~~ #
+    
+    apk update && apk add wget
+    
+    # ~~~~~ FASTERQ-DUMP 2.10.8 ~~~~~ #
+    cd /opt
+    wget https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.10.8/sratoolkit.2.10.8-ubuntu64.tar.gz && \
+    tar -xvzf sratoolkit.2.10.8-ubuntu64.tar.gz && rm sratoolkit.2.10.8-ubuntu64.tar.gz 
+    export PATH="/opt/sratoolkit.2.10.8-ubuntu64/bin:${PATH}"
+    
+%environment
+    export PATH="${PATH}:/opt/sratoolkit.2.10.8-ubuntu64/bin"
+
+%labels
+    Author Nicolas Descostes
+    Version v0.0.1
+    
