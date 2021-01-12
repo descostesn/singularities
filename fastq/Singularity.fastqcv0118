@@ -9,7 +9,7 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
 
     # ~~~~~~ General setup and folder creation ~~~~~~ #
     
-    apt-get update && apt-get install -y wget bzip2
+    apt-get update && apt-get install -y wget bzip2 perl
     
     export LC_ALL=C
     export LC_CTYPE=C 
