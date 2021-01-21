@@ -1,0 +1,9 @@
+Bootstrap: docker
+From: biocontainers/trimmomatic:v0.38dfsg-1-deb_cv1
+
+%runscript
+    echo "Running container biocontainers/trimmomatic:v0.38dfsg-1-deb_cv1, trimmomatic 0.38"
+    exec /bin/bash "$@"
+
+%post
+    mkdir /cluster /work /tsd /projects
