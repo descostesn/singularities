@@ -1,0 +1,30 @@
+BootStrap: debootstrap
+OSVersion: bionic
+MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+
+%help
+
+    SOAP3-dp, like its predecessor SOAP3, is a GPU-based software for aligning short reads to a reference sequence.
+    Publication: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0065632
+    Repository: https://github.com/aquaskyline/SOAP3-dp
+    Download: https://sourceforge.net/projects/soap3dp/
+
+%post
+    # ~~~~~~ General setup and folder creation ~~~~~~ #
+    
+    apt-get update && apt-get install -y wget
+    
+    # ~~~~~~~~~~~ SOAP3-dp ~~~~~~~~~~~~~~~~~~~~~~~~ #
+    cd /opt
+    wget  https://downloads.sourceforge.net/project/soap3dp/v2.3.172/soap3-dp-2.3.172-cuda4.2-linux-AmazonEC2.tar.gz
+    tar -xvzf soap3-dp-2.3.172-cuda4.2-linux-AmazonEC2.tar.gz & rm soap3-dp-2.3.172-cuda4.2-linux-AmazonEC2.tar.gz
+    mv  4.2-amazon/ soap3-dp
+    export PATH="/opt/soap3-dp:${PATH}" 
+
+%environment
+    export PATH="${PATH}:/opt/soap3-dp" 
+
+%labels
+    Author Nicolas Descostes
+    Version v0.0.1
+
