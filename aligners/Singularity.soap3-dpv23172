@@ -17,7 +17,7 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
     # ~~~~~~~~~~~ SOAP3-dp ~~~~~~~~~~~~~~~~~~~~~~~~ #
     cd /opt
     wget  https://downloads.sourceforge.net/project/soap3dp/v2.3.172/soap3-dp-2.3.172-cuda4.2-linux-AmazonEC2.tar.gz
-    tar -xvzf soap3-dp-2.3.172-cuda4.2-linux-AmazonEC2.tar.gz & rm soap3-dp-2.3.172-cuda4.2-linux-AmazonEC2.tar.gz
+    tar -xvzf soap3-dp-2.3.172-cuda4.2-linux-AmazonEC2.tar.gz && rm soap3-dp-2.3.172-cuda4.2-linux-AmazonEC2.tar.gz
     mv  4.2-amazon/ soap3-dp
     export PATH="/opt/soap3-dp:${PATH}" 
 
